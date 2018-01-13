@@ -10,14 +10,17 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JList;
+import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
-public class Menu extends JFrame {
+public class MainFrame extends JFrame {
 
+	RunningProcessList WU = new RunningProcessList();
+	
 	static ArrayList<String> procsToClose = new ArrayList<String>();
 	static ArrayList<String> openedProcs = new ArrayList<String>();
 	
-	private JList list = new JList();
+	JList list = new JList();
 	
 	JButton ProcsKill = new JButton("프로세스 종료");
 	FlowLayout flow = new FlowLayout();
@@ -45,9 +48,7 @@ public class Menu extends JFrame {
 		}
 	}
 	
-
-
-	public Menu()
+	public MainFrame()
 	{
 		super("Mining Process Kill");
 		super.setLayout(flow);		
@@ -61,6 +62,9 @@ public class Menu extends JFrame {
 			}
 		});
 		
+		//list.setListData(WU.DisplayRunningProcess());
+		
+		add(new JScrollPane(list),"Center");
 		
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		//list.setListData(listStr);
@@ -75,7 +79,7 @@ public class Menu extends JFrame {
 		
 	}
 	public static void main(String[] args) {
-		new Menu();
+		new MainFrame();
 	}
 
 }
