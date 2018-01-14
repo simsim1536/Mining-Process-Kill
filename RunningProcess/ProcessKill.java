@@ -2,15 +2,16 @@ package RunningProcess;
 
 import java.io.IOException;
 
-public class ProcessKill {
+public  class ProcessKill{
 
-	public static void main(String[] args) {
+	//프로세스 종료
+	public static void ProcsKill(){
 		try{
-			Runtime.getRuntime().exec("taskkill /F /IM 종료할 프로세스명");
+			Runtime.getRuntime().exec("taskkill /F /IM notepad.exe");
 		}
 		catch(IOException e)
 		{
 			e.printStackTrace();
-	}
-}
+		}	
+		}
 }
