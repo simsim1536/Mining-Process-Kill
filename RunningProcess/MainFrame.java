@@ -53,7 +53,10 @@ public class MainFrame extends JFrame implements ListSelectionListener {
 		super("Mining Process Kill");
 		super.setLayout(flow);		
 		
+		//프로세스 종료 버튼 추가
 		add(Killbtn);
+		
+		//버튼 클릭시 선택된 프로세스 종료
 		Killbtn.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
@@ -61,14 +64,17 @@ public class MainFrame extends JFrame implements ListSelectionListener {
 				Kill.ProcsKill();
 			}
 		});
+		
 		list = new JList(names);
 		add(ProcsKillbtn);
 		
+		//리스트에 스크롤 추가
 		scroll = new JScrollPane(list);
 		scroll.setBorder(border);
 		scroll.setViewportView(list);
 		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		
+		//프로세스 목록을 출력할 리스트 표시
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		//list.setListData(PList.result);
 		list.addListSelectionListener(this);
