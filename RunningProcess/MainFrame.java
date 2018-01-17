@@ -47,14 +47,18 @@ public class MainFrame extends JFrame implements ListSelectionListener {
 	Border border = BorderFactory.createTitledBorder("프로세스 목록");
 	
 	String[] names = {"프로세스 목록"};
-
+ static Iterator IM = PList.processes.iterator();
+	
 	public MainFrame()
 	{
+		
 		super("Mining Process Kill");
 		super.setLayout(flow);		
 		
 		//프로세스 종료 버튼 추가
 		add(Killbtn);
+		
+		List PROCS = PList.listRunningProcesses();
 		
 		//버튼 클릭시 선택된 프로세스 종료
 		Killbtn.addActionListener(new ActionListener()
@@ -65,7 +69,7 @@ public class MainFrame extends JFrame implements ListSelectionListener {
 			}
 		});
 		
-		list = new JList(names);
+		list = new JList(PList.processes.toArray());
 		add(ProcsKillbtn);
 		
 		//리스트에 스크롤 추가
@@ -76,9 +80,12 @@ public class MainFrame extends JFrame implements ListSelectionListener {
 		
 		//프로세스 목록을 출력할 리스트 표시
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		//list.setListData(PList.result);
+		list.setListData(PList.processes.toArray()); //리스트에 프로세스 목록 출력
 		list.addListSelectionListener(this);
-		list.setPreferredSize(new Dimension(300, 350));
+		list.setPreferredSize(new Dimension(300, 2000)); //리스트 크기 지정
+		
+		//System.out.println(PROCS);
+		
 		
 		Label.setText("선택한 프로세스 : ");
 		selectedList.setEditable(false);
@@ -103,6 +110,6 @@ public class MainFrame extends JFrame implements ListSelectionListener {
 	
 	public static void main(String[] args) {
 		new MainFrame();
-		PList.DisplayRunningProcess();
+		//PList.DisplayRunningProcess();
 	}
 }

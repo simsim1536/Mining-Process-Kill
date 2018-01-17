@@ -7,12 +7,16 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Vector;
 
 import javax.swing.ListModel;
  
 public class RunningProcessList {
+	
+
+    public static List processes = new ArrayList();
+
 	public static List listRunningProcesses(){
-        List processes = new ArrayList();
         //프로세스 리스트 불러오기
         try{
             String line;
@@ -26,15 +30,15 @@ public class RunningProcessList {
         }catch (Exception e){
             e.printStackTrace();
         }
+        HashSet<String> distinctData = new HashSet<String>(processes);
+        processes = new ArrayList<String>(distinctData);
         return processes;
     }
  
-    public static void DisplayRunningProcess() {
+    /*public static void DisplayRunningProcess() {
     	  List processes = listRunningProcesses();
-
           //중복된 이름의 프로세스는 하나만 표시
-          HashSet<String> distinctData = new HashSet<String>(processes);
-          processes = new ArrayList<String>(distinctData);
+
           String result = "";
           
           // 실행 프로세스 출력
@@ -49,5 +53,7 @@ public class RunningProcessList {
               }
           }
           System.out.printf(result);
-    }
+    }*/
+    
+
 }
