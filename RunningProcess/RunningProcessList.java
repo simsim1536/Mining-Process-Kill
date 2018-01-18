@@ -34,26 +34,4 @@ public class RunningProcessList {
         processes = new ArrayList<String>(distinctData);
         return processes;
     }
- 
-    /*public static void DisplayRunningProcess() {
-    	  List processes = listRunningProcesses();
-          //중복된 이름의 프로세스는 하나만 표시
-
-          String result = "";
-          
-          // 실행 프로세스 출력
-          Iterator it = processes.iterator();
-          int i = 0;
-          while (it.hasNext()){
-              result += it.next() + "\n";
-              i++;
-              if (i == 10){
-                  result += "\n";
-                  i = 0;
-              }
-          }
-          System.out.printf(result);
-    }*/
-    
-
 }
