@@ -45,8 +45,8 @@ public class MainFrame extends JFrame implements ListSelectionListener {
 	JList list=new JList();
 	JScrollPane scroll;
 	Border border = BorderFactory.createTitledBorder("프로세스 목록");
-	
 	String[] names = {"프로세스 목록"};
+	
  static Iterator IM = PList.processes.iterator();
 	
 	public MainFrame()
@@ -54,9 +54,6 @@ public class MainFrame extends JFrame implements ListSelectionListener {
 		
 		super("Mining Process Kill");
 		super.setLayout(flow);		
-		
-		//프로세스 종료 버튼 추가
-		add(Killbtn);
 		
 		List PROCS = PList.listRunningProcesses();
 		
@@ -69,34 +66,33 @@ public class MainFrame extends JFrame implements ListSelectionListener {
 			}
 		});
 		
-		list = new JList(PList.processes.toArray());
-		add(ProcsKillbtn);
-		
-		//리스트에 스크롤 추가
 		scroll = new JScrollPane(list);
 		scroll.setBorder(border);
 		scroll.setViewportView(list);
 		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		
-		//프로세스 목록을 출력할 리스트 표시
-		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); //리스트 인덱스를 한번에 한개만 선택
 		list.setListData(PList.processes.toArray()); //리스트에 프로세스 목록 출력
 		list.addListSelectionListener(this);
 		list.setPreferredSize(new Dimension(300, 2000)); //리스트 크기 지정
+		list = new JList(PList.processes.toArray()); //리스트를 배열로 바꿔줌
+
 		
-		//System.out.println(PROCS);
-		
+		//컴포넌트에 기능 추가
+		listPanel.add(scroll); //리스트 컴포넌트에 스크롤 기능 추가
+		labelPanel.add(Label);
 		
 		Label.setText("선택한 프로세스 : ");
-		selectedList.setEditable(false);
-		
-		listPanel.add(scroll);
-		labelPanel.add(Label);
 		Label.add(selectedList);
-		add(listPanel, BorderLayout.CENTER);
-		add(labelPanel, BorderLayout.SOUTH);
 		
-		setSize(350, 400);
+		add(Killbtn); //채굴 프로세스 종료 버튼
+		add(ProcsKillbtn); //선택된 프로세스 종료 버튼
+		add(listPanel); //프로세스 목록 출력
+		add(labelPanel); 
+
+
+		selectedList.setEditable(false);
+		setSize(400, 400);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
@@ -107,9 +103,7 @@ public class MainFrame extends JFrame implements ListSelectionListener {
 		selectedList.setText(name);
 	}
 	
-	
 	public static void main(String[] args) {
 		new MainFrame();
-		//PList.DisplayRunningProcess();
 	}
 }
