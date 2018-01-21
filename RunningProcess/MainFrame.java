@@ -2,6 +2,7 @@ package RunningProcess;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Event;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,7 +31,7 @@ public class MainFrame extends JFrame implements ListSelectionListener {
 
 	ProcessKill Kill = new ProcessKill();
 	static RunningProcessList PList = new RunningProcessList();
-	static String name;
+	public static String name;
 	JTextField selectedList = new JTextField(10);
 	JLabel Label = new JLabel();
 	JButton ProcsKillbtn = new JButton("프로세스 종료"); //프로세스 종료 버튼 생성자
@@ -44,7 +45,6 @@ public class MainFrame extends JFrame implements ListSelectionListener {
 		
 	public MainFrame()
 	{
-		
 		super("Mining Process Kill");
 		super.setLayout(flow);		
 		
@@ -72,9 +72,7 @@ public class MainFrame extends JFrame implements ListSelectionListener {
 		Label.setText("선택한 프로세스 : ");
 		selectedList.setEditable(false);
 		Label.add(selectedList);
-		
-		//System.out.print(selectedList);
-		
+				
 		add(Killbtn); //채굴 프로세스 종료 버튼
 		add(ProcsKillbtn); //선택된 프로세스 종료 버튼
 		add(listPanel); //프로세스 목록 출력
@@ -97,7 +95,7 @@ public class MainFrame extends JFrame implements ListSelectionListener {
 				Kill.MiningProcsKill();
 			}
 		});
-				
+
 		//기본 프레임 셋팅
 		setSize(400, 400);
 		setVisible(true);
@@ -108,10 +106,13 @@ public class MainFrame extends JFrame implements ListSelectionListener {
 	//리스트에 출력된 프로세스 목록 중 선택된 프로세스명 얻기 
 	public void valueChanged(ListSelectionEvent e)
 	{
-	
-		String name = (String) list.getSelectedValue();
+	if(!e.getValueIsAdjusting()) //마우스가 버튼 클릭 후 떼면 리스트에서 프로세스명 선택
+	{
+		name = (String) list.getSelectedValue();
 		selectedList.setText(name);
-		System.out.print(name);
+		//System.out.print(name);
+
+	}
 	}
 	
 	public static void main(String[] args) {
