@@ -1,7 +1,10 @@
 package RunningProcess;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.swing.event.ListSelectionEvent;
@@ -10,7 +13,8 @@ public  class ProcessKill{
 
 	static MainFrame Main = new MainFrame();
 	static String P = "taskkill /F /IM ";
-
+	static String PRCS = "notepad.exe"; //채굴 프로세스명 등록
+	
 	//프로세스명에 해당하는 프로세스 종료
 	public static void ProcsKill(){
 		String K = (String) Main.list.getSelectedValue(); //리스트에서 선택된 프로세스명 불러오기
@@ -31,9 +35,7 @@ public  class ProcessKill{
 	
 	//채굴 프로세스 종료
 	public static void MiningProcsKill(){
-		String PRCS = "notepad.exe"; //채굴 프로세스명 등록
-		String KillPRCS = "taskkill /F /IM "; //프로세스 종료 명령
-		String MPROCS = KillPRCS+PRCS;
+		String MPROCS = P + PRCS;
 		try{
 			Runtime.getRuntime().exec(MPROCS);
 		}
@@ -41,9 +43,10 @@ public  class ProcessKill{
 		{
 			e.printStackTrace();
 		}
-			//System.out.print(MPROCS);	
+			System.out.print(MPROCS);	
 		}
+	
 	public static void main(String[] args) {
-		ProcsKill();
+		MiningProcsKill();
 	}
-}
+	}
