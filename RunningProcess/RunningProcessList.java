@@ -30,6 +30,7 @@ public class RunningProcessList {
         }catch (Exception e){
             e.printStackTrace();
         }
+        //중복된 이름의 프로세스 하나만 표시
         HashSet<String> distinctData = new HashSet<String>(processes);
         processes = new ArrayList<String>(distinctData);
         return processes;
